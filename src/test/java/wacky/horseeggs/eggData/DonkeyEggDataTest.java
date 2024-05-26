@@ -4,8 +4,9 @@
 
 package wacky.horseeggs.eggData;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+
 import java.util.Objects;
 import org.bukkit.entity.AbstractHorse;
 import org.bukkit.entity.ChestedHorse;
@@ -13,9 +14,8 @@ import org.bukkit.entity.Donkey;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Horse;
 import org.bukkit.inventory.AbstractHorseInventory;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import wacky.horseeggs.eggData.factory.EggDataFactory;
@@ -41,7 +41,7 @@ public class DonkeyEggDataTest {
    *
    * @throws java.lang.Exception すべての例外
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     openMocks();
   }
@@ -67,7 +67,7 @@ public class DonkeyEggDataTest {
     this.setUpDonkey();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.DONKEY, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getEntityType()));
+    assertTrue(Objects.nonNull(eggData.getEntityType()));
   }
 
   /**
@@ -78,7 +78,7 @@ public class DonkeyEggDataTest {
     this.setUpDonkey();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.DONKEY, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getFilledEggEntityType()));
+    assertTrue(Objects.nonNull(eggData.getFilledEggEntityType()));
   }
 
   /**
@@ -89,7 +89,7 @@ public class DonkeyEggDataTest {
     this.setUpDonkey();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.DONKEY, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getFilledEggMaterial()));
+    assertTrue(Objects.nonNull(eggData.getFilledEggMaterial()));
   }
 
   /**
@@ -100,6 +100,6 @@ public class DonkeyEggDataTest {
     this.setUpDonkey();
 
     EggDataBase eggData = new DonkeyEggData();
-    Assert.assertTrue(Objects.nonNull(eggData));
+    assertTrue(Objects.nonNull(eggData));
   }
 }

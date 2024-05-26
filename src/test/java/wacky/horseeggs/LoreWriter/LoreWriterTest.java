@@ -1,5 +1,7 @@
 package wacky.horseeggs.LoreWriter;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumSet;
@@ -12,9 +14,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.Llama;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -156,7 +157,7 @@ public class LoreWriterTest {
   @Mock
   EggDataBase eggData;
 
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     openMocks();
   }
@@ -169,7 +170,7 @@ public class LoreWriterTest {
   public final void testGetLoreList() {
     Mockito.doReturn(horseEggDataMap.get(dataKeyOwner)).when(eggData).getOwner();
     LoreWriter horseLw = LoreWriterFactory.newLoreWriter(EntityType.HORSE, eggData);
-    Assert.assertTrue(!horseLw.getLoreList().isEmpty());
+    assertTrue(!horseLw.getLoreList().isEmpty());
   }
 
   @Test
@@ -178,19 +179,19 @@ public class LoreWriterTest {
     Mockito.doReturn(horseEggDataMap.get(dataKeyColor)).when(eggData).getColor();
     Mockito.doReturn(horseEggDataMap.get(dataKeyStyle)).when(eggData).getStyle();
     LoreWriter horseLw = LoreWriterFactory.newLoreWriter(EntityType.HORSE, eggData);
-    Assert.assertTrue(validationColorStyle(horseLw.getColorStyleLore()));
+    assertTrue(validationColorStyle(horseLw.getColorStyleLore()));
 
     // ロバ
     Mockito.doReturn(donkeyEggDataMap.get(dataKeyColor)).when(eggData).getColor();
     Mockito.doReturn(donkeyEggDataMap.get(dataKeyStyle)).when(eggData).getStyle();
     LoreWriter donkeyLw = LoreWriterFactory.newLoreWriter(EntityType.DONKEY, eggData);
-    Assert.assertTrue(validationColorStyle(donkeyLw.getColorStyleLore()));
+    assertTrue(validationColorStyle(donkeyLw.getColorStyleLore()));
 
     // ラマ
     Mockito.doReturn(llamaEggDataMap.get(dataKeyColor)).when(eggData).getColor();
     Mockito.doReturn(llamaEggDataMap.get(dataKeyStyle)).when(eggData).getStyle();
     LoreWriter llamaLw = LoreWriterFactory.newLoreWriter(EntityType.LLAMA, eggData);
-    Assert.assertTrue(validationColorStyle(llamaLw.getColorStyleLore()));
+    assertTrue(validationColorStyle(llamaLw.getColorStyleLore()));
   }
 
   static boolean validationColorStyle(String lore) {
@@ -236,19 +237,19 @@ public class LoreWriterTest {
     Mockito.doReturn(horseEggDataMap.get(dataKeyHealth)).when(eggData).getHealth();
     Mockito.doReturn(horseEggDataMap.get(dataKeyMaxHealth)).when(eggData).getMaxHealth();
     LoreWriter horseLw = LoreWriterFactory.newLoreWriter(EntityType.HORSE, eggData);
-    Assert.assertTrue(validateHealthLore(horseLw.getHealthLore()));
+    assertTrue(validateHealthLore(horseLw.getHealthLore()));
 
     // ロバ
     Mockito.doReturn(donkeyEggDataMap.get(dataKeyHealth)).when(eggData).getHealth();
     Mockito.doReturn(donkeyEggDataMap.get(dataKeyMaxHealth)).when(eggData).getMaxHealth();
     LoreWriter donkeyLw = LoreWriterFactory.newLoreWriter(EntityType.DONKEY, eggData);
-    Assert.assertTrue(validateHealthLore(donkeyLw.getHealthLore()));
+    assertTrue(validateHealthLore(donkeyLw.getHealthLore()));
 
     // ラマ
     Mockito.doReturn(llamaEggDataMap.get(dataKeyHealth)).when(eggData).getHealth();
     Mockito.doReturn(llamaEggDataMap.get(dataKeyMaxHealth)).when(eggData).getMaxHealth();
     LoreWriter llamaLw = LoreWriterFactory.newLoreWriter(EntityType.LLAMA, eggData);
-    Assert.assertTrue(validateHealthLore(llamaLw.getHealthLore()));
+    assertTrue(validateHealthLore(llamaLw.getHealthLore()));
   }
 
   static boolean validateHealthLore(String lore) {
@@ -296,17 +297,17 @@ public class LoreWriterTest {
     // ウマ
     Mockito.doReturn(horseEggDataMap.get(dataKeyJump)).when(eggData).getJump();
     LoreWriter horseLw = LoreWriterFactory.newLoreWriter(EntityType.HORSE, eggData);
-    Assert.assertTrue(validateHeightLore(horseLw.getHeightLore()));
+    assertTrue(validateHeightLore(horseLw.getHeightLore()));
 
     // ロバ
     Mockito.doReturn(donkeyEggDataMap.get(dataKeyJump)).when(eggData).getJump();
     LoreWriter donkeyLw = LoreWriterFactory.newLoreWriter(EntityType.DONKEY, eggData);
-    Assert.assertTrue(validateHeightLore(donkeyLw.getHeightLore()));
+    assertTrue(validateHeightLore(donkeyLw.getHeightLore()));
 
     // ラマ
     Mockito.doReturn(llamaEggDataMap.get(dataKeyJump)).when(eggData).getJump();
     LoreWriter llamaLw = LoreWriterFactory.newLoreWriter(EntityType.LLAMA, eggData);
-    Assert.assertTrue(validateHeightLore(llamaLw.getHeightLore()));
+    assertTrue(validateHeightLore(llamaLw.getHeightLore()));
   }
 
   static boolean validateHeightLore(String lore) {
@@ -352,17 +353,17 @@ public class LoreWriterTest {
     // ウマ
     Mockito.doReturn(horseEggDataMap.get(dataKeyOwner)).when(eggData).getOwner();
     LoreWriter horseLw = LoreWriterFactory.newLoreWriter(EntityType.HORSE, eggData);
-    Assert.assertTrue(validateOwnerLore(horseLw.getOwnerLore()));
+    assertTrue(validateOwnerLore(horseLw.getOwnerLore()));
 
     // ロバ
     Mockito.doReturn(donkeyEggDataMap.get(dataKeyOwner)).when(eggData).getOwner();
     LoreWriter donkeyLw = LoreWriterFactory.newLoreWriter(EntityType.DONKEY, eggData);
-    Assert.assertTrue(validateOwnerLore(donkeyLw.getOwnerLore()));
+    assertTrue(validateOwnerLore(donkeyLw.getOwnerLore()));
 
     // ラマ
     Mockito.doReturn(llamaEggDataMap.get(dataKeyOwner)).when(eggData).getOwner();
     LoreWriter llamaLw = LoreWriterFactory.newLoreWriter(EntityType.LLAMA, eggData);
-    Assert.assertTrue(validateOwnerLore(llamaLw.getOwnerLore()));
+    assertTrue(validateOwnerLore(llamaLw.getOwnerLore()));
   }
 
   static boolean validateOwnerLore(String lore) {
@@ -390,21 +391,21 @@ public class LoreWriterTest {
     Mockito.doReturn(horseEggDataMap.get(dataKeyChest)).when(eggData).getIsCarryingChest();
     Mockito.doReturn(horseEggDataMap.get(dataKeySaddle)).when(eggData).getIsSaddled();
     LoreWriter horseLw = LoreWriterFactory.newLoreWriter(EntityType.HORSE, eggData);
-    Assert.assertTrue(validateEquipmentLore(horseLw.getEquipmentLore()));
+    assertTrue(validateEquipmentLore(horseLw.getEquipmentLore()));
 
     // ロバ
     Mockito.doReturn(donkeyEggDataMap.get(dataKeyArmor)).when(eggData).getArmor();
     Mockito.doReturn(donkeyEggDataMap.get(dataKeyChest)).when(eggData).getIsCarryingChest();
     Mockito.doReturn(donkeyEggDataMap.get(dataKeySaddle)).when(eggData).getIsSaddled();
     LoreWriter donkeyLw = LoreWriterFactory.newLoreWriter(EntityType.DONKEY, eggData);
-    Assert.assertTrue(validateEquipmentLore(donkeyLw.getEquipmentLore()));
+    assertTrue(validateEquipmentLore(donkeyLw.getEquipmentLore()));
 
     // ラマ
     Mockito.doReturn(llamaEggDataMap.get(dataKeyArmor)).when(eggData).getArmor();
     Mockito.doReturn(llamaEggDataMap.get(dataKeyChest)).when(eggData).getIsCarryingChest();
     Mockito.doReturn(llamaEggDataMap.get(dataKeySaddle)).when(eggData).getIsSaddled();
     LoreWriter llamaLw = LoreWriterFactory.newLoreWriter(EntityType.LLAMA, eggData);
-    Assert.assertTrue(validateEquipmentLore(llamaLw.getEquipmentLore()));
+    assertTrue(validateEquipmentLore(llamaLw.getEquipmentLore()));
   }
 
   static boolean validateEquipmentLore(String lore) {
@@ -449,17 +450,17 @@ public class LoreWriterTest {
     // ウマ
     Mockito.doReturn(horseEggDataMap.get(dataKeySpeed)).when(eggData).getSpeed();
     LoreWriter horseLw = LoreWriterFactory.newLoreWriter(EntityType.HORSE, eggData);
-    Assert.assertTrue(validateSpeedLore(horseLw.getSpeedLore()));
+    assertTrue(validateSpeedLore(horseLw.getSpeedLore()));
 
     // ロバ
     Mockito.doReturn(donkeyEggDataMap.get(dataKeySpeed)).when(eggData).getSpeed();
     LoreWriter donkeyLw = LoreWriterFactory.newLoreWriter(EntityType.DONKEY, eggData);
-    Assert.assertTrue(validateSpeedLore(donkeyLw.getSpeedLore()));
+    assertTrue(validateSpeedLore(donkeyLw.getSpeedLore()));
 
     // ラマ
     Mockito.doReturn(llamaEggDataMap.get(dataKeySpeed)).when(eggData).getSpeed();
     LoreWriter llamaLw = LoreWriterFactory.newLoreWriter(EntityType.LLAMA, eggData);
-    Assert.assertTrue(validateSpeedLore(llamaLw.getSpeedLore()));
+    assertTrue(validateSpeedLore(llamaLw.getSpeedLore()));
   }
 
   static boolean validateSpeedLore(String lore) {
@@ -508,17 +509,17 @@ public class LoreWriterTest {
     // ウマ
     Mockito.doReturn(horseEggDataMap.get(dataKeyStrength)).when(eggData).getStrength();
     LoreWriter horseLw = LoreWriterFactory.newLoreWriter(EntityType.HORSE, eggData);
-    Assert.assertTrue(validateStrengthLore(horseLw.getStrengthLore()));
+    assertTrue(validateStrengthLore(horseLw.getStrengthLore()));
 
     // ロバ
     Mockito.doReturn(donkeyEggDataMap.get(dataKeyStrength)).when(eggData).getStrength();
     LoreWriter donkeyLw = LoreWriterFactory.newLoreWriter(EntityType.DONKEY, eggData);
-    Assert.assertTrue(validateStrengthLore(donkeyLw.getStrengthLore()));
+    assertTrue(validateStrengthLore(donkeyLw.getStrengthLore()));
 
     // ラマ
     Mockito.doReturn(llamaEggDataMap.get(dataKeyStrength)).when(eggData).getStrength();
     LoreWriter llamaLw = LoreWriterFactory.newLoreWriter(EntityType.LLAMA, eggData);
-    Assert.assertTrue(validateStrengthLore(llamaLw.getStrengthLore()));
+    assertTrue(validateStrengthLore(llamaLw.getStrengthLore()));
   }
 
   static boolean validateStrengthLore(String lore) {

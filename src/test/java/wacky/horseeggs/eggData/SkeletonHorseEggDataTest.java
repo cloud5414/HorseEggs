@@ -4,8 +4,9 @@
 
 package wacky.horseeggs.eggData;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+
 import java.util.Objects;
 import java.util.UUID;
 import org.bukkit.attribute.Attribute;
@@ -16,9 +17,8 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.SkeletonHorse;
 import org.bukkit.inventory.AbstractHorseInventory;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import wacky.horseeggs.eggData.factory.EggDataFactory;
@@ -47,7 +47,7 @@ public class SkeletonHorseEggDataTest {
    *
    * @throws java.lang.Exception すべての例外
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     openMocks();
   }
@@ -83,7 +83,7 @@ public class SkeletonHorseEggDataTest {
     this.setUpSkeletonHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.SKELETON_HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getEntityType()));
+    assertTrue(Objects.nonNull(eggData.getEntityType()));
   }
 
   /**
@@ -94,7 +94,7 @@ public class SkeletonHorseEggDataTest {
     this.setUpSkeletonHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.SKELETON_HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getFilledEggEntityType()));
+    assertTrue(Objects.nonNull(eggData.getFilledEggEntityType()));
   }
 
   /**
@@ -105,7 +105,7 @@ public class SkeletonHorseEggDataTest {
     this.setUpSkeletonHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.SKELETON_HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getFilledEggMaterial()));
+    assertTrue(Objects.nonNull(eggData.getFilledEggMaterial()));
   }
 
   /**
@@ -116,6 +116,6 @@ public class SkeletonHorseEggDataTest {
     this.setUpSkeletonHorse();
 
     EggDataBase eggData = new SkeletonHorseEggData();
-    Assert.assertTrue(Objects.nonNull(eggData));
+    assertTrue(Objects.nonNull(eggData));
   }
 }

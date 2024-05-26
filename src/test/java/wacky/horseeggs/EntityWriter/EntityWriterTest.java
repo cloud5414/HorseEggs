@@ -1,12 +1,12 @@
 /**
- * 
+ * Entity writer for entity data.
  */
+
 package wacky.horseeggs.EntityWriter;
 
-import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-import java.io.File;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -18,31 +18,31 @@ import org.bukkit.Server;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.AbstractHorse;
+import org.bukkit.entity.AnimalTamer;
 import org.bukkit.entity.ChestedHorse;
 import org.bukkit.entity.Donkey;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.Llama;
 import org.bukkit.inventory.AbstractHorseInventory;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.bukkit.inventory.HorseInventory;
+import org.bukkit.inventory.ItemFactory;
+import org.bukkit.inventory.LlamaInventory;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.MockSettings;
 import org.mockito.MockedStatic;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import wacky.horseeggs.EntityWriter.factory.EntityWriterFactory;
 import wacky.horseeggs.eggData.EggDataBase;
 
 /**
- * 
+ * {@link EntityWriter} クラスを検証するテストクラスです.
  */
-//@RunWith(org.bukkit.Bukkit.class)
 public class EntityWriterTest {
-  
+
   static final String dataKeyChest = "Chest";
   static final String dataKeySpeed = "Speed";
   static final String dataKeyHealth = "Health";
@@ -124,12 +124,51 @@ public class EntityWriterTest {
   EggDataBase eggData;
   
   @Mock
+  Horse horse;
+
+  @Mock
+  Donkey donkey;
+
+  @Mock
+  Llama llama;
+
+  @Mock
   AbstractHorse absHorse;
+
+  @Mock
+  AbstractHorseInventory absHorseInv;
+
+  @Mock
+  HorseInventory horseInv;
+
+  @Mock
+  LlamaInventory llamaInv;
+
+  @Mock
+  AttributeInstance attr;
+
+  @Mock
+  AnimalTamer animalTamer;
+
+  @Mock
+  ChestedHorse chestedHorse;
+
+  @Mock
+  ItemMeta itemMeta;
+
+  @Mock
+  Server server;
+
+  @Mock
+  ItemFactory itemFactory;
   
+  @Mock
+  OfflinePlayer offlinePlayer;
+
   /**
    * @throws java.lang.Exception
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     openMocks();
   }
@@ -138,10 +177,84 @@ public class EntityWriterTest {
     MockitoAnnotations.openMocks(this);
   }
 
+  private void setUpHorse() {
+    absHorse = horse;
+    when(horse.getColor()).thenReturn(Horse.Color.BLACK);
+    when(horse.getStyle()).thenReturn(Horse.Style.NONE);
+
+    when(animalTamer.getName()).thenReturn("ウマの飼い主");
+    final UUID uuid = new UUID(2968001111801612278L, -6995725480010122770L);
+    when(animalTamer.getUniqueId()).thenReturn(uuid);
+
+    when(absHorse.getInventory()).thenReturn(horseInv);
+    when(absHorse.getVariant()).thenReturn(Horse.Variant.HORSE);
+    when(absHorse.getType()).thenReturn(EntityType.HORSE);
+    when(absHorse.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED)).thenReturn(attr);
+    when(absHorse.getAttribute(Attribute.GENERIC_MAX_HEALTH)).thenReturn(attr);
+    when(absHorse.getCustomName()).thenReturn("うまいウマ");
+    when(absHorse.isTamed()).thenReturn(true);
+    when(absHorse.getOwner()).thenReturn(animalTamer);
+
+    when(eggData.getName()).thenReturn((String) horseEggDataMap.get(dataKeyName));
+    when(eggData.getMaxHealth()).thenReturn((Double) horseEggDataMap.get(dataKeyMaxHealth));
+    when(eggData.getHealth()).thenReturn((Double) horseEggDataMap.get(dataKeyHealth));
+    when(eggData.getSpeed()).thenReturn((Double) horseEggDataMap.get(dataKeySpeed));
+    when(eggData.getUuidMost()).thenReturn((Long) horseEggDataMap.get(dataKeyUuidMost));
+    when(eggData.getUuidLeast()).thenReturn((Long) horseEggDataMap.get(dataKeyUuidLeast));
+    when(eggData.getIsSaddled()).thenReturn((Boolean) horseEggDataMap.get(dataKeySaddle));
+    when(eggData.getIsCarryingChest()).thenReturn((Boolean) horseEggDataMap.get(dataKeyChest));
+    when(eggData.getEntityType()).thenReturn(EntityType.HORSE);
+
+  }
+
+  private void setUpDonkey() {
+    absHorse = donkey;
+    when(absHorse.getInventory()).thenReturn(absHorseInv);
+    when(absHorse.getVariant()).thenReturn(Horse.Variant.DONKEY);
+    when(absHorse.getType()).thenReturn(EntityType.DONKEY);
+    when(absHorse.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED)).thenReturn(attr);
+    when(absHorse.getAttribute(Attribute.GENERIC_MAX_HEALTH)).thenReturn(attr);
+
+    when(chestedHorse.isCarryingChest()).thenReturn(true);
+    
+    when(eggData.getName()).thenReturn((String) donkeyEggDataMap.get(dataKeyName));
+    when(eggData.getMaxHealth()).thenReturn((Double) donkeyEggDataMap.get(dataKeyMaxHealth));
+    when(eggData.getHealth()).thenReturn((Double) donkeyEggDataMap.get(dataKeyHealth));
+    when(eggData.getSpeed()).thenReturn((Double) donkeyEggDataMap.get(dataKeySpeed));
+    when(eggData.getUuidMost()).thenReturn((Long) donkeyEggDataMap.get(dataKeyUuidMost));
+    when(eggData.getUuidLeast()).thenReturn((Long) donkeyEggDataMap.get(dataKeyUuidLeast));
+    when(eggData.getIsSaddled()).thenReturn((Boolean) donkeyEggDataMap.get(dataKeySaddle));
+    when(eggData.getIsCarryingChest()).thenReturn((Boolean) donkeyEggDataMap.get(dataKeyChest));
+    when(eggData.getEntityType()).thenReturn(EntityType.DONKEY);
+
+  }
+  
+  private void setUpLlama() {
+    absHorse = llama;
+    when(llama.getColor()).thenReturn(Llama.Color.WHITE);
+
+    when(absHorse.getInventory()).thenReturn(llamaInv);
+    when(absHorse.getVariant()).thenReturn(Horse.Variant.LLAMA);
+    when(absHorse.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED)).thenReturn(attr);
+    when(absHorse.getAttribute(Attribute.GENERIC_MAX_HEALTH)).thenReturn(attr);
+    when(absHorse.getType()).thenReturn(EntityType.LLAMA);
+
+    when(eggData.getName()).thenReturn((String) llamaEggDataMap.get(dataKeyName));
+    when(eggData.getMaxHealth()).thenReturn((Double) llamaEggDataMap.get(dataKeyMaxHealth));
+    when(eggData.getHealth()).thenReturn((Double) llamaEggDataMap.get(dataKeyHealth));
+    when(eggData.getSpeed()).thenReturn((Double) llamaEggDataMap.get(dataKeySpeed));
+    when(eggData.getUuidMost()).thenReturn((Long) llamaEggDataMap.get(dataKeyUuidMost));
+    when(eggData.getUuidLeast()).thenReturn((Long) llamaEggDataMap.get(dataKeyUuidLeast));
+    when(eggData.getIsSaddled()).thenReturn((Boolean) llamaEggDataMap.get(dataKeySaddle));
+    when(eggData.getIsCarryingChest()).thenReturn((Boolean) llamaEggDataMap.get(dataKeyChest));
+    when(eggData.getEntityType()).thenReturn(EntityType.LLAMA);
+
+  }
+
   /**
    * {@link EntityWriter#EntityWriter(AbstractHorse)} のためのテスト・メソッド。
    */
-  @Ignore("EntityWriterTest#testWriteHorseBase で検証")
+  @Disabled("EntityWriterTest#testWriteHorseBase で検証")
   @Test
   public final void testEntityWriter() {
     fail("まだ実装されていません"); // TODO
@@ -150,7 +263,7 @@ public class EntityWriterTest {
   /**
    * {@link EntityWriter#writeHorse(EggDataBase)} のためのテスト・メソッド。
    */
-  @Ignore("継承先クラスで検証")
+  @Disabled("継承先クラスで検証")
   @Test
   public final void testWriteHorse() {
     fail("まだ実装されていません"); // TODO
@@ -163,119 +276,65 @@ public class EntityWriterTest {
   public final void testWriteHorseBase() {
     // ウマ
     try (MockedStatic<Bukkit> bukkit = mockStatic(Bukkit.class)) {
-      Mockito.doReturn(horseEggDataMap.get(dataKeyName)).when(eggData).getName();
-      Mockito.doReturn(horseEggDataMap.get(dataKeyMaxHealth)).when(eggData).getMaxHealth();
-      Mockito.doReturn(horseEggDataMap.get(dataKeyHealth)).when(eggData).getHealth();
-      Mockito.doReturn(horseEggDataMap.get(dataKeySpeed)).when(eggData).getSpeed();
-      Mockito.doReturn(horseEggDataMap.get(dataKeyJump)).when(eggData).getJump();
-      Mockito.doReturn(horseEggDataMap.get(dataKeyUuidMost)).when(eggData).getUuidMost();
-      Mockito.doReturn(horseEggDataMap.get(dataKeyUuidLeast)).when(eggData).getUuidLeast();
-      Mockito.doReturn(horseEggDataMap.get(dataKeySaddle)).when(eggData).getIsSaddled();
-      Mockito.doReturn(horseEggDataMap.get(dataKeyChest)).when(eggData).getIsCarryingChest();
-      Mockito.doReturn(EntityType.HORSE).when(eggData).getEntityType();
-
-      AttributeInstance attr = mock(AttributeInstance.class);
-      Mockito.doReturn(attr).when(absHorse).getAttribute(Attribute.GENERIC_MOVEMENT_SPEED);
-
+      setUpHorse();
       Long uuidMost = Long.valueOf(horseEggDataMap.get(dataKeyUuidMost).toString());
       Long uuidLeast = Long.valueOf(horseEggDataMap.get(dataKeyUuidLeast).toString());
       UUID id = new UUID(uuidMost, uuidLeast);
 
-      OfflinePlayer offlinePlayer = mock(OfflinePlayer.class);
-      Server server = mock(Server.class);
-
       bukkit.when(() -> Bukkit.setServer(server)).thenCallRealMethod();
 
       when(server.getOfflinePlayer(id)).thenReturn(offlinePlayer);
-      AbstractHorseInventory absHorseInv = mock(AbstractHorseInventory.class);
-      when(absHorse.getInventory()).thenReturn(absHorseInv);
+      when(absHorse.getInventory()).thenReturn(horseInv);
 
       EntityWriter horseEw = EntityWriterFactory.newEntityWriter(eggData.getEntityType(), absHorse);
-      Assert.assertTrue(horseEw.writeHorseBase(eggData));
-//      AbstractHorse horseAbsHorse = horseEw.getAbsHorse();
-//      Assert.assertTrue(Objects.nonNull(horseAbsHorse));
+      assertTrue(horseEw.writeHorseBase(eggData));
+      // AbstractHorse horseAbsHorse = horseEw.getAbsHorse();
+      // Assert.assertTrue(Objects.nonNull(horseAbsHorse));
     }
 
     // ロバ
     absHorse = mock(Donkey.class);
     try (MockedStatic<Bukkit> bukkit = mockStatic(Bukkit.class)) {
-      Mockito.doReturn(donkeyEggDataMap.get(dataKeyName)).when(eggData).getName();
-      Mockito.doReturn(donkeyEggDataMap.get(dataKeyMaxHealth)).when(eggData).getMaxHealth();
-      Mockito.doReturn(donkeyEggDataMap.get(dataKeyHealth)).when(eggData).getHealth();
-      Mockito.doReturn(donkeyEggDataMap.get(dataKeySpeed)).when(eggData).getSpeed();
-      Mockito.doReturn(donkeyEggDataMap.get(dataKeyJump)).when(eggData).getJump();
-      Mockito.doReturn(donkeyEggDataMap.get(dataKeyUuidMost)).when(eggData).getUuidMost();
-      Mockito.doReturn(donkeyEggDataMap.get(dataKeyUuidLeast)).when(eggData).getUuidLeast();
-      Mockito.doReturn(donkeyEggDataMap.get(dataKeySaddle)).when(eggData).getIsSaddled();
-      Mockito.doReturn(donkeyEggDataMap.get(dataKeyChest)).when(eggData).getIsCarryingChest();
-      Mockito.doReturn(EntityType.DONKEY).when(eggData).getEntityType();
-
-      AttributeInstance attr = mock(AttributeInstance.class);
-      Mockito.doReturn(attr).when(absHorse).getAttribute(Attribute.GENERIC_MOVEMENT_SPEED);
-
+      setUpDonkey();
       Long uuidMost = Long.valueOf(donkeyEggDataMap.get(dataKeyUuidMost).toString());
       Long uuidLeast = Long.valueOf(donkeyEggDataMap.get(dataKeyUuidLeast).toString());
       UUID id = new UUID(uuidMost, uuidLeast);
 
-      OfflinePlayer offlinePlayer = mock(OfflinePlayer.class);
-      Server server = mock(Server.class);
-
       bukkit.when(() -> Bukkit.setServer(server)).thenCallRealMethod();
 
       when(server.getOfflinePlayer(id)).thenReturn(offlinePlayer);
-
-      AbstractHorseInventory absHorseInv = mock(AbstractHorseInventory.class);
       when(absHorse.getInventory()).thenReturn(absHorseInv);
-
 
       EntityWriter donkeyEw =
           EntityWriterFactory.newEntityWriter(eggData.getEntityType(), absHorse);
-      Assert.assertTrue(donkeyEw.writeHorseBase(eggData));
+      assertTrue(donkeyEw.writeHorseBase(eggData));
       AbstractHorse donkeyAbsHorse = donkeyEw.getAbsHorse();
-      Assert.assertTrue(Objects.nonNull(donkeyAbsHorse));
+      assertTrue(Objects.nonNull(donkeyAbsHorse));
     }
 
     // ラマ
     try (MockedStatic<Bukkit> bukkit = mockStatic(Bukkit.class)) {
-      Mockito.doReturn(llamaEggDataMap.get(dataKeyName)).when(eggData).getName();
-      Mockito.doReturn(llamaEggDataMap.get(dataKeyMaxHealth)).when(eggData).getMaxHealth();
-      Mockito.doReturn(llamaEggDataMap.get(dataKeyHealth)).when(eggData).getHealth();
-      Mockito.doReturn(llamaEggDataMap.get(dataKeySpeed)).when(eggData).getSpeed();
-      Mockito.doReturn(llamaEggDataMap.get(dataKeyJump)).when(eggData).getJump();
-      // Mockito.doReturn(llamaEggDataMap.get(dataKeyUuidMost)).when(eggData).getUuidMost();
-      Mockito.doReturn(null).when(eggData).getUuidMost();
-      // Mockito.doReturn(llamaEggDataMap.get(dataKeyUuidLeast)).when(eggData).getUuidLeast();
-      Mockito.doReturn(null).when(eggData).getUuidLeast();
-      Mockito.doReturn(llamaEggDataMap.get(dataKeySaddle)).when(eggData).getIsSaddled();
-      Mockito.doReturn(llamaEggDataMap.get(dataKeyChest)).when(eggData).getIsCarryingChest();
-      Mockito.doReturn(EntityType.LLAMA).when(eggData).getEntityType();
-
-      AttributeInstance attr = mock(AttributeInstance.class);
-      Mockito.doReturn(attr).when(absHorse).getAttribute(Attribute.GENERIC_MOVEMENT_SPEED);
-
+      setUpLlama();
       Long uuidMost = Long.valueOf(llamaEggDataMap.get(dataKeyUuidMost).toString());
       Long uuidLeast = Long.valueOf(llamaEggDataMap.get(dataKeyUuidLeast).toString());
       UUID id = new UUID(uuidMost, uuidLeast);
-
-      OfflinePlayer offlinePlayer = mock(OfflinePlayer.class);
-      Server server = mock(Server.class);
 
       bukkit.when(() -> Bukkit.setServer(server)).thenCallRealMethod();
 
       when(server.getOfflinePlayer(id)).thenReturn(offlinePlayer);
 
       EntityWriter llamaEw = EntityWriterFactory.newEntityWriter(eggData.getEntityType(), absHorse);
-      Assert.assertTrue(llamaEw.writeHorseBase(eggData));
-      
+      assertTrue(llamaEw.writeHorseBase(eggData));
+
       AbstractHorse llamaAbsHorse = llamaEw.getAbsHorse();
-      Assert.assertTrue(Objects.nonNull(llamaAbsHorse));
+      assertTrue(Objects.nonNull(llamaAbsHorse));
     }
   }
 
   /**
    * {@link wacky.horseeggs.EntityWriter.EntityWriter#getAbsHorse()} のためのテスト・メソッド。
    */
-  @Ignore("EntityWriterTest#testWriteHorseBase で検証")
+  @Disabled("EntityWriterTest#testWriteHorseBase で検証")
   @Test
   public final void testGetAbsHorse() {
     fail("まだ実装されていません"); // TODO

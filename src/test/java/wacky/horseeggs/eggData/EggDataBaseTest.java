@@ -4,7 +4,9 @@
 
 package wacky.horseeggs.eggData;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.UUID;
@@ -29,9 +31,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.LlamaInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
@@ -88,7 +89,7 @@ public class EggDataBaseTest {
    *
    * @throws java.lang.Exception すべての例外
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     openMocks();
   }
@@ -144,7 +145,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData));
+    assertTrue(Objects.nonNull(eggData));
   }
 
   /**
@@ -155,7 +156,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData));
+    assertTrue(Objects.nonNull(eggData));
   }
 
   /**
@@ -186,7 +187,7 @@ public class EggDataBaseTest {
     };
     this.setUpHorse();
     EggDataBase horseEggData = EggDataFactory.newEggData(Material.HORSE_SPAWN_EGG, metaData);
-    Assert.assertTrue(Objects.nonNull(horseEggData));
+    assertTrue(Objects.nonNull(horseEggData));
     
     // ラマ
     metaData = new HashMap<String, Object>() {
@@ -208,7 +209,7 @@ public class EggDataBaseTest {
     };
     this.setUpLlama();
     EggDataBase llamaEggData = EggDataFactory.newEggData(Material.LLAMA_SPAWN_EGG, metaData);
-    Assert.assertTrue(Objects.nonNull(llamaEggData));
+    assertTrue(Objects.nonNull(llamaEggData));
   }
 
   /**
@@ -219,7 +220,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getDisplayName()));
+    assertTrue(Objects.nonNull(eggData.getDisplayName()));
   }
 
   /**
@@ -230,7 +231,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getEmptyEggEntityType()));
+    assertTrue(Objects.nonNull(eggData.getEmptyEggEntityType()));
   }
 
   /**
@@ -241,7 +242,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getEmptyEggMaterial()));
+    assertTrue(Objects.nonNull(eggData.getEmptyEggMaterial()));
   }
 
   /**
@@ -252,7 +253,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getEntityType()));
+    assertTrue(Objects.nonNull(eggData.getEntityType()));
   }
 
   /**
@@ -263,7 +264,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getFilledEggEntityType()));
+    assertTrue(Objects.nonNull(eggData.getFilledEggEntityType()));
   }
 
   /**
@@ -274,7 +275,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getFilledEggMaterial()));
+    assertTrue(Objects.nonNull(eggData.getFilledEggMaterial()));
   }
 
   /**
@@ -285,7 +286,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getRecipeMaterialA()));
+    assertTrue(Objects.nonNull(eggData.getRecipeMaterialA()));
   }
 
   /**
@@ -296,7 +297,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getRecipeMaterialB()));
+    assertTrue(Objects.nonNull(eggData.getRecipeMaterialB()));
   }
 
   /**
@@ -313,7 +314,7 @@ public class EggDataBaseTest {
     LoreWriter lw = LoreWriterFactory.newLoreWriter(entityType, eggData);
     var entityWriterloreList = lw.generateLore(eggData);
     eggData.setLoreList(entityWriterloreList);
-    Assert.assertTrue(Objects.nonNull(eggData.getLoreList()));
+    assertTrue(Objects.nonNull(eggData.getLoreList()));
   }
 
   /**
@@ -324,7 +325,7 @@ public class EggDataBaseTest {
     this.setUpDonkey();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.DONKEY, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.isHasInventory()));
+    assertTrue(Objects.nonNull(eggData.isHasInventory()));
   }
 
   /**
@@ -335,7 +336,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertEquals(eggData.getDataKeyDisplay(), "display");
+    assertEquals(eggData.getDataKeyDisplay(), "display");
   }
 
   /**
@@ -346,7 +347,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertEquals(eggData.getDataKeyLore(), "Lore");
+    assertEquals(eggData.getDataKeyLore(), "Lore");
   }
 
   /**
@@ -357,7 +358,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertEquals(eggData.getDataKeyEntityTag(), "EntityTag");
+    assertEquals(eggData.getDataKeyEntityTag(), "EntityTag");
   }
 
   /**
@@ -368,7 +369,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertEquals(eggData.getDataKeyId(), "id");
+    assertEquals(eggData.getDataKeyId(), "id");
   }
 
   /**
@@ -379,7 +380,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertEquals(eggData.getDataKeyMinecraft(), NamespacedKey.MINECRAFT + ":");
+    assertEquals(eggData.getDataKeyMinecraft(), NamespacedKey.MINECRAFT + ":");
   }
 
   /**
@@ -390,7 +391,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertEquals(eggData.getDataKeyChest(), "Chest");
+    assertEquals(eggData.getDataKeyChest(), "Chest");
   }
 
   /**
@@ -401,7 +402,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertEquals(eggData.getDataKeySpeed(), "Speed");
+    assertEquals(eggData.getDataKeySpeed(), "Speed");
   }
 
   /**
@@ -412,7 +413,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertEquals(eggData.getDataKeyHealth(), "Health");
+    assertEquals(eggData.getDataKeyHealth(), "Health");
   }
 
   /**
@@ -423,7 +424,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertEquals(eggData.getDataKeyUuidLeast(), "UUIDLeast");
+    assertEquals(eggData.getDataKeyUuidLeast(), "UUIDLeast");
   }
 
   /**
@@ -434,7 +435,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertEquals(eggData.getDataKeyUuidMost(), "UUIDMost");
+    assertEquals(eggData.getDataKeyUuidMost(), "UUIDMost");
   }
 
   /**
@@ -445,7 +446,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertEquals(eggData.getDataKeyColor(), "Color");
+    assertEquals(eggData.getDataKeyColor(), "Color");
   }
 
   /**
@@ -456,7 +457,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertEquals(eggData.getDataKeyJump(), "Jump");
+    assertEquals(eggData.getDataKeyJump(), "Jump");
   }
 
   /**
@@ -467,7 +468,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertEquals(eggData.getDataKeyMaxHealth(), "MaxHealth");
+    assertEquals(eggData.getDataKeyMaxHealth(), "MaxHealth");
   }
 
   /**
@@ -478,7 +479,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertEquals(eggData.getDataKeyName(), "Name");
+    assertEquals(eggData.getDataKeyName(), "Name");
   }
 
   /**
@@ -489,7 +490,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertEquals(eggData.getDataKeyType(), "Type");
+    assertEquals(eggData.getDataKeyType(), "Type");
   }
 
   /**
@@ -500,7 +501,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertEquals(eggData.getDataKeyVariant(), "Variant");
+    assertEquals(eggData.getDataKeyVariant(), "Variant");
   }
 
   /**
@@ -511,7 +512,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertEquals(eggData.getDataKeyArmor(), "Armor");
+    assertEquals(eggData.getDataKeyArmor(), "Armor");
   }
 
   /**
@@ -522,7 +523,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertEquals(eggData.getDataKeyArmorColor(), "ArmorColor");
+    assertEquals(eggData.getDataKeyArmorColor(), "ArmorColor");
   }
 
   /**
@@ -533,7 +534,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertEquals(eggData.getDataKeyStyle(), "Style");
+    assertEquals(eggData.getDataKeyStyle(), "Style");
   }
 
   /**
@@ -544,7 +545,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertEquals(eggData.getDataKeySaddle(), "Saddle");
+    assertEquals(eggData.getDataKeySaddle(), "Saddle");
   }
 
   /**
@@ -555,7 +556,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertEquals(eggData.getDataKeyStrength(), "Strength");
+    assertEquals(eggData.getDataKeyStrength(), "Strength");
   }
 
   /**
@@ -566,7 +567,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getLoreList()));
+    assertTrue(Objects.nonNull(eggData.getLoreList()));
   }
 
   /**
@@ -577,7 +578,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getOwner()));
+    assertTrue(Objects.nonNull(eggData.getOwner()));
   }
 
   /**
@@ -588,7 +589,7 @@ public class EggDataBaseTest {
     this.setUpDonkey();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.DONKEY, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getIsCarryingChest()));
+    assertTrue(Objects.nonNull(eggData.getIsCarryingChest()));
   }
 
   /**
@@ -599,7 +600,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getSpeed()));
+    assertTrue(Objects.nonNull(eggData.getSpeed()));
   }
 
   /**
@@ -610,7 +611,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getHealth()));
+    assertTrue(Objects.nonNull(eggData.getHealth()));
   }
 
   /**
@@ -621,7 +622,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getColor()));
+    assertTrue(Objects.nonNull(eggData.getColor()));
   }
 
   /**
@@ -632,7 +633,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getJump()));
+    assertTrue(Objects.nonNull(eggData.getJump()));
   }
 
   /**
@@ -643,7 +644,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getMaxHealth()));
+    assertTrue(Objects.nonNull(eggData.getMaxHealth()));
   }
 
   /**
@@ -654,7 +655,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getName()));
+    assertTrue(Objects.nonNull(eggData.getName()));
   }
 
   /**
@@ -665,7 +666,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getIsSaddled()));
+    assertTrue(Objects.nonNull(eggData.getIsSaddled()));
   }
 
   /**
@@ -676,7 +677,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getVariant()));
+    assertTrue(Objects.nonNull(eggData.getVariant()));
   }
 
   /**
@@ -687,7 +688,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getType()));
+    assertTrue(Objects.nonNull(eggData.getType()));
   }
 
   /**
@@ -698,7 +699,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getUuidLeast()));
+    assertTrue(Objects.nonNull(eggData.getUuidLeast()));
   }
 
   /**
@@ -709,7 +710,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getUuidMost()));
+    assertTrue(Objects.nonNull(eggData.getUuidMost()));
   }
 
   /**
@@ -728,7 +729,7 @@ public class EggDataBaseTest {
       when(horseInv.getArmor()).thenReturn(itemStack);
 
       EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-      Assert.assertTrue(Objects.nonNull(eggData.getArmor()));
+      assertTrue(Objects.nonNull(eggData.getArmor()));
     }
   }
 
@@ -740,7 +741,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getStyle()));
+    assertTrue(Objects.nonNull(eggData.getStyle()));
   }
 
   /**
@@ -751,7 +752,7 @@ public class EggDataBaseTest {
     this.setUpLlama();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.LLAMA, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getStrength()));
+    assertTrue(Objects.nonNull(eggData.getStrength()));
   }
 
   /**
@@ -779,7 +780,7 @@ public class EggDataBaseTest {
       when(horseInv.getArmor()).thenReturn(itemStack);
 
       EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-      Assert.assertTrue(Objects.nonNull(eggData.getArmorColor()));
+      assertTrue(Objects.nonNull(eggData.getArmorColor()));
     }
   }
 
@@ -791,7 +792,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getTagDataMap()));
+    assertTrue(Objects.nonNull(eggData.getTagDataMap()));
   }
 
   /**
@@ -802,7 +803,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getHorseEggTagDataMap()));
+    assertTrue(Objects.nonNull(eggData.getHorseEggTagDataMap()));
   }
 
   /**
@@ -813,7 +814,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getIdNamespaceMap()));
+    assertTrue(Objects.nonNull(eggData.getIdNamespaceMap()));
   }
 
   /**
@@ -824,7 +825,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getEntityTagMap()));
+    assertTrue(Objects.nonNull(eggData.getEntityTagMap()));
   }
 
   /**
@@ -835,7 +836,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getDisplayMap()));
+    assertTrue(Objects.nonNull(eggData.getDisplayMap()));
   }
 
   /**
@@ -846,7 +847,7 @@ public class EggDataBaseTest {
     this.setUpHorse();
 
     EggDataBase eggData = EggDataFactory.newEggData(EntityType.HORSE, absHorse);
-    Assert.assertTrue(Objects.nonNull(eggData.getHorseEggTagDataList()));
+    assertTrue(Objects.nonNull(eggData.getHorseEggTagDataList()));
   }
 
 }
