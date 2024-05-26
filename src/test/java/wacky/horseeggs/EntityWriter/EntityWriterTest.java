@@ -266,7 +266,8 @@ public class EntityWriterTest {
   @Disabled("継承先クラスで検証")
   @Test
   public final void testWriteHorse() {
-    fail("まだ実装されていません"); // TODO
+//    fail("まだ実装されていません"); // TODO
+    
   }
 
   /**
