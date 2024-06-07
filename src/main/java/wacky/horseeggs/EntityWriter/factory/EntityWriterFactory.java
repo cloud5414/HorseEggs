@@ -14,15 +14,6 @@ import wacky.horseeggs.EntityWriter.MuleEntityWriter;
 import wacky.horseeggs.EntityWriter.SkeltonHorseEntityWriter;
 import wacky.horseeggs.EntityWriter.TraderLlamaEntityWriter;
 import wacky.horseeggs.EntityWriter.ZombieHorseEntityWriter;
-import wacky.horseeggs.LoreWriter.DonkeyLoreWriter;
-import wacky.horseeggs.LoreWriter.HorseLoreWriter;
-import wacky.horseeggs.LoreWriter.LlamaLoreWriter;
-import wacky.horseeggs.LoreWriter.LoreWriter;
-import wacky.horseeggs.LoreWriter.MuleLoreWriter;
-import wacky.horseeggs.LoreWriter.SkeletonHorseLoreWriter;
-import wacky.horseeggs.LoreWriter.TraderLlamaLoreWriter;
-import wacky.horseeggs.LoreWriter.ZombieHorseLoreWriter;
-import wacky.horseeggs.eggData.EggDataBase;
 
 /**
  * Factory class of EntityWriter.

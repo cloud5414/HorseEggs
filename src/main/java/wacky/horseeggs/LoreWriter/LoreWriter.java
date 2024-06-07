@@ -13,7 +13,6 @@ import java.util.Objects;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Material;
-import org.bukkit.entity.Entity;
 import wacky.horseeggs.eggData.EggDataBase;
 
 /**
